@@ -1,9 +1,0 @@
-{
-  "project_name": "sentinel",
-  "repo_url": "https://github.com/useeman32-design/sentinel.git",
-  "repo_short": "useeman32-design/sentinel",
-  "vscode_path": "C:\xampp\htdocs\sentinel",
-  "token_placeholder": "CONFIGURED - Token saved in secrets, not here",
-  "last_setup": "2026-08-13T00:18:28Z",
-  "instructions": "In fresh chat: Read MASTER_SYNC_SETUP.json and setup sync. Provide token: ghp_xxxx"
-}

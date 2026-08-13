@@ -1,8 +1,4 @@
-# Secrets
-*sync.sh
-*daemon.sh
 .env
 token.txt
 config.json
 .arena-secrets/
-*.pem
