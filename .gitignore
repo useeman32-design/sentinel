@@ -1,4 +1,13 @@
+# Secrets
 .env
+.env.local
 token.txt
 config.json
 .arena-secrets/
+*.pem
+
+# Node
+node_modules
+dist
+.DS_Store
+*.log
