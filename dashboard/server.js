@@ -134,14 +134,14 @@ const server = http.createServer(async (req,res)=>{
       const cfg = loadConfig();
       res.writeHead(200,{'Content-Type':'application/json'});
       res.end(JSON.stringify({
-        remote: remote.raw,
+        remote: remote.masked,
         remote_masked: remote.masked,
         daemon_running: running,
         last_push: lastPush,
         files,
         log,
-        vscode_path: cfg.vscode_path || 'C:\\xampp\\htdocs\\Sentinel-AI',
-        repo_url: cfg.repo_url || remote.raw
+        vscode_path: cfg.vscode_path || 'C:\\xampp\\htdocs\\sentinel',
+        repo_url: (cfg.repo_url || remote.masked || '').replace(/https:\/\/[^@\s]+@/g, 'https://***TOKEN***@')
       }));
       return;
     }
