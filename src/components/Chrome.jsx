@@ -94,9 +94,13 @@ export function Verdict({ result }) {
         </div>
         {result.recommendation}
       </div>
-      <p className="tiny muted" style={{ marginTop: 10 }}>
-        Source: {result.source}. Full Gemini analysis attaches when the API key is configured.
-      </p>
+      <div className="sources">
+        {(result.sources || [result.source]).filter(Boolean).map((s) => (
+          <span className="chip chip-info" key={s}>
+            {s}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

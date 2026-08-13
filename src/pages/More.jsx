@@ -137,22 +137,41 @@ export function Settings() {
 }
 
 export function Notifications() {
-  const items = [
-    ['High Risk', 'Dangerous SMS lure blocked', 'chip-bad'],
-    ['Suspicious Activity', 'New login from Abuja', 'chip-warn'],
-    ['Password Weak', 'Work mailbox below policy', 'chip-warn'],
-    ['New Threat', 'Fake Opay APK circulating', 'chip-info'],
-  ];
+  const { notifs, markReceived, markAllReceived, unread } = useApp();
   return (
     <>
       <StatusBar />
       <div className="scroll page-enter">
-        <TopBar title="Notifications" back />
-        {items.map(([k, t, c]) => (
-          <div className="card" key={t} style={{ marginBottom: 10 }}>
-            <span className={`chip ${c}`}>{k}</span>
-            <p style={{ margin: '8px 0 0' }}>{t}</p>
-          </div>
+        <TopBar
+          title="Notifications"
+          subtitle={`${unread} unread`}
+          back
+          right={
+            <button className="linkish" onClick={markAllReceived}>
+              Mark all
+            </button>
+          }
+        />
+        {notifs.map((n) => (
+          <article key={n.id} className={`notif ${n.seen ? 'seen' : ''}`}>
+            <div className="grow">
+              <span className={`chip ${n.tone}`}>{n.kind}</span>
+              <h3 style={{ margin: '8px 0 4px', fontSize: 16 }}>{n.title}</h3>
+              <p className="muted" style={{ margin: 0, fontSize: 13, lineHeight: 1.45 }}>
+                {n.body}
+              </p>
+              <div className="tiny muted" style={{ marginTop: 8 }}>
+                {n.time} ago
+              </div>
+            </div>
+            {!n.seen ? (
+              <button className="mark" onClick={() => markReceived(n.id)}>
+                Mark received
+              </button>
+            ) : (
+              <span className="tiny muted">Received</span>
+            )}
+          </article>
         ))}
       </div>
     </>
