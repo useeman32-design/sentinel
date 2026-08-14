@@ -4,44 +4,44 @@ import { StatusBar, TopBar } from '../components/Chrome';
 export const COURSES = [
   {
     id: 'beginner',
-    title: 'Everyday self-defence',
-    blurb: 'OTP, BVN, WhatsApp and ATM basics.',
+    title: 'Everyday Self-Defence',
+    blurb: 'Master OTP protection, BVN security, WhatsApp locks and ATM safety.',
     lessons: 6,
     progress: 45,
     items: [
-      { t: 'How phishing actually works', body: 'Attackers copy a brand you trust, then rush you. Pause. Open the official app yourself.' },
-      { t: 'OTP and PIN hygiene', body: 'No bank, CBN or NIMC agent needs your OTP. Hang up and call the number on your card.' },
-      { t: 'WhatsApp privacy that matters', body: 'Lock the app, hide last seen, and never approve a new device you did not start.' },
-      { t: 'Airtime and “family emergency” scams', body: 'Call the relative on a known number. Do not send airtime to a stranger “holding” them.' },
-      { t: 'Safe public Wi-Fi', body: 'Avoid banking on free café Wi-Fi. Use your mobile data or a trusted VPN.' },
-      { t: 'Quiz · 8 questions', body: 'Prove you can spot a fake GTBank SMS.' },
+      { t: 'How Phishing Really Works', body: 'Attackers create high-urgency lookalike sites imitating your bank or payment apps. Always pause, verify the domain spelling, and open the official app directly.' },
+      { t: 'OTP and PIN Hygiene', body: 'No bank, CBN official, or telecommunications support agent will ever ask for your 6-digit OTP or debit card PIN. Disconnect immediately.' },
+      { t: 'Hardening WhatsApp & Social Accounts', body: 'Enable Two-Step Verification with a PIN, disable automatic group additions, and audit linked web sessions regularly.' },
+      { t: 'Airtime & “Emergency” Impersonation Scams', body: 'Always phone the family member or friend on their known cellular line before transferring emergency funds or airtime requested via chat.' },
+      { t: 'Public Wi-Fi & Shared Device Safety', body: 'Never perform financial transactions or login to sensitive portals on free public Wi-Fi without an encrypted VPN tunnel.' },
+      { t: 'Practical Quiz · 8 Questions', body: 'Test your ability to spot deceptive SMS headers and domain typos.' },
     ],
   },
   {
     id: 'intermediate',
-    title: 'Account takeover lab',
-    blurb: 'SIM-swap, BEC and QR fraud.',
-    lessons: 7,
+    title: 'Account Takeover Lab',
+    blurb: 'SIM-swap prevention, BEC, spoofed invoices and QR tampering.',
+    lessons: 5,
     progress: 20,
     items: [
-      { t: 'SIM-swap playbook', body: 'PIN-lock your SIM. If signal dies suddenly, call the operator from another phone.' },
-      { t: 'Business email compromise', body: 'Verify new bank details by voice. Attackers sit in inboxes for weeks.' },
-      { t: 'QR and invoice swaps', body: 'Check the domain after the scan. A sticker on a POS can point to a thief.' },
-      { t: 'Password managers', body: 'One long unique secret per site. Sentinel can test strength without storing it.' },
-      { t: 'Quiz · incident drill', body: 'Walk a compromised Opay account to safety.' },
+      { t: 'SIM-Swap Playbook & Indicators', body: 'Set a custom SIM PIN with your telecom provider. If your phone suddenly loses network bars in a known good coverage zone, alert your bank immediately.' },
+      { t: 'Business Email Compromise (BEC)', body: 'Attackers silently compromise vendor mailboxes and send altered bank settlement details. Always verbally verify account changes via known telephone numbers.' },
+      { t: 'Malicious QR Codes & POS Tampering', body: 'Examine QR code stickers on physical counters for tampering. Always review the decoded URL before submitting credentials.' },
+      { t: 'Password Managers & Unique Entropy', body: 'Use unique, high-entropy passphrases for every portal. Never reuse banking passwords on social media or e-commerce sites.' },
+      { t: 'Live Incident Drill', body: 'Step-by-step walkthrough of isolating a compromised mobile device and reclaiming stolen credentials.' },
     ],
   },
   {
     id: 'advanced',
-    title: 'Team response',
-    blurb: 'For analysts and founders.',
-    lessons: 8,
-    progress: 8,
+    title: 'Team & Enterprise Response',
+    blurb: 'Triage playbooks, malware signature analysis, and board-ready reporting.',
+    lessons: 4,
+    progress: 10,
     items: [
-      { t: 'Triage in 15 minutes', body: 'Contain, preserve evidence, notify, then recover.' },
-      { t: 'Malware first look', body: 'Never run an unknown EXE. Hash it in the File scanner first.' },
-      { t: 'Board-ready reporting', body: 'Risk, impact, residual exposure, next control.' },
-      { t: 'Capstone', body: 'Write a one-page brief for a phishing surge.' },
+      { t: 'Incident Triage in 15 Minutes', body: 'Immediate containment, session revocation, artifact preservation, regulatory notification, and disaster recovery execution.' },
+      { t: 'Malware First Look & Header Analysis', body: 'Inspecting PE headers, magic bytes, ELF markers, and cryptographic hashes without executing untrusted binaries.' },
+      { t: 'Executive Risk Communication', body: 'Translating technical indicators of compromise (IOCs) into measurable business risk, impact matrices, and preventive controls.' },
+      { t: 'Capstone Defense Drill', body: 'Draft a comprehensive response protocol for a coordinated spear-phishing attack targeting finance staff.' },
     ],
   },
 ];
@@ -52,27 +52,37 @@ export function Training() {
     <>
       <StatusBar />
       <div className="scroll page-enter">
-        <TopBar title="Cyber Academy" subtitle="Protect yourself in today’s Nigeria" back />
+        <TopBar title="Cyber Academy" subtitle="Interactive defense training for Nigeria" back />
+
         <div className="academy" style={{ marginBottom: 14 }}>
           <div>
-            <h3>Learn. Then scan.</h3>
-            <p>Short lessons built around real scams — then jump back into the scanners and practise.</p>
+            <h3>Interactive Academy</h3>
+            <p>Practical lessons modeled on real Nigerian fraud campaigns. Learn defense principles, then practice in the scanners.</p>
           </div>
         </div>
+
+        <div className="section-title">Available Learning Tracks</div>
+
         {COURSES.map((c) => (
-          <button key={c.id} className="card" style={{ width: '100%', textAlign: 'left', marginBottom: 10 }} onClick={() => nav(`/app/training/${c.id}`)}>
-            <div className="row" style={{ paddingTop: 0, border: 0 }}>
-              <b>{c.title}</b>
+          <button
+            key={c.id}
+            className="card"
+            style={{ width: '100%', textAlign: 'left', marginBottom: 12, cursor: 'pointer' }}
+            onClick={() => nav(`/app/training/${c.id}`)}
+          >
+            <div className="row" style={{ paddingTop: 0, border: 0, marginBottom: 4 }}>
+              <b style={{ fontSize: 16 }}>{c.title}</b>
               <span className="tiny muted">{c.lessons} lessons</span>
             </div>
-            <p className="muted" style={{ margin: '0 0 10px', fontSize: 13 }}>
+            <p className="muted" style={{ margin: '0 0 12px', fontSize: 13, lineHeight: 1.45 }}>
               {c.blurb}
             </p>
             <div className="progress">
               <span style={{ width: `${c.progress}%` }} />
             </div>
-            <div className="tiny muted" style={{ marginTop: 8 }}>
-              {c.progress}% complete
+            <div className="tiny muted" style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between' }}>
+              <span>{c.progress}% completed</span>
+              <span style={{ color: 'var(--blue)', fontWeight: 600 }}>Start lesson →</span>
             </div>
           </button>
         ))}
@@ -88,20 +98,22 @@ export function Course() {
     <>
       <StatusBar />
       <div className="scroll page-enter">
-        <TopBar title={c.title} subtitle="Read · practise · certificate at 100%" back />
+        <TopBar title={c.title} subtitle="Read & complete drills for certificate" back />
+
         {c.items.map((item, i) => (
-          <div className="card" key={item.t} style={{ marginBottom: 10 }}>
-            <div className="tiny muted">
-              {i + 1 < c.items.length ? `LESSON ${i + 1}` : 'QUIZ'}
+          <div className="card" key={item.t} style={{ marginBottom: 12 }}>
+            <div className="tiny muted" style={{ fontWeight: 800, letterSpacing: '0.06em', marginBottom: 4 }}>
+              {i + 1 < c.items.length ? `MODULE 0${i + 1}` : 'EXAM / DRILL'}
             </div>
-            <b>{item.t}</b>
-            <p className="muted" style={{ margin: '8px 0 0', lineHeight: 1.5 }}>
+            <b style={{ fontSize: 15 }}>{item.t}</b>
+            <p className="muted" style={{ margin: '8px 0 0', lineHeight: 1.55, fontSize: 13 }}>
               {item.body}
             </p>
           </div>
         ))}
-        <button className="btn btn-primary" style={{ marginTop: 8 }}>
-          Mark lesson complete
+
+        <button className="btn btn-primary" style={{ marginTop: 12, marginBottom: 20 }}>
+          Mark Track Complete
         </button>
       </div>
     </>
