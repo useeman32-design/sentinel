@@ -77,23 +77,36 @@ export function BottomNav({ active }) {
 
 export function Verdict({ result }) {
   if (!result) return null;
-  const cls = result.verdict === 'Safe' ? 'chip-safe' : result.verdict === 'Suspicious' ? 'chip-warn' : 'chip-bad';
+  const isSafe = result.verdict === 'Safe';
+  const isWarn = result.verdict === 'Suspicious';
+  const chipCls = isSafe ? 'chip-safe' : isWarn ? 'chip-warn' : 'chip-bad';
+  const cardCls = isSafe ? 'safe' : isWarn ? 'suspicious' : 'dangerous';
+
   return (
-    <div className="card page-enter" style={{ marginTop: 14 }}>
+    <div className={`verdict-card page-enter ${cardCls}`}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span className={`chip ${cls}`}>{result.verdict}</span>
-        <b style={{ fontFamily: 'var(--display)', fontSize: 28 }}>{result.riskScore}</b>
-      </div>
-      <p className="tiny muted" style={{ margin: '6px 0 10px' }}>
-        Risk score · {result.threatType}
-      </p>
-      <p style={{ margin: 0, lineHeight: 1.5, fontSize: 14 }}>{result.explanation}</p>
-      <div className="card" style={{ marginTop: 12, background: 'var(--surface-2)', padding: 12 }}>
-        <div className="tiny muted" style={{ marginBottom: 4 }}>
-          RECOMMENDATION
+        <span className={`chip ${chipCls}`}>{result.verdict}</span>
+        <div style={{ textAlign: 'right' }}>
+          <b style={{ fontFamily: 'var(--display)', fontSize: 28, fontWeight: 800 }}>{result.riskScore}</b>
+          <div className="tiny muted">/ 100 Risk</div>
         </div>
-        {result.recommendation}
       </div>
+      {result.threatType && (
+        <div className="tiny muted" style={{ marginTop: 6, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          Category · {result.threatType}
+        </div>
+      )}
+      <p style={{ margin: '10px 0 0', lineHeight: 1.5, fontSize: 14, color: 'var(--text)' }}>
+        {result.explanation}
+      </p>
+      {result.recommendation && (
+        <div className="card" style={{ marginTop: 14, background: 'var(--surface-2)', padding: 12, borderRadius: 14 }}>
+          <div className="tiny muted" style={{ marginBottom: 4, fontWeight: 700, letterSpacing: '0.05em' }}>
+            RECOMMENDATION
+          </div>
+          <div style={{ fontSize: 13, lineHeight: 1.45 }}>{result.recommendation}</div>
+        </div>
+      )}
       <div className="sources">
         {(result.sources || [result.source]).filter(Boolean).map((s) => (
           <span className="chip chip-info" key={s}>
