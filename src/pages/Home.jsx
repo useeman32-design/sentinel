@@ -19,23 +19,37 @@ const NEWS = [
 ];
 
 function MiniRing({ value }) {
-  const r = 36;
+  const r = 32;
   const c = 2 * Math.PI * r;
   const off = c - (value / 100) * c;
   return (
-    <svg width="88" height="88" viewBox="0 0 88 88">
-      <circle cx="44" cy="44" r={r} stroke="rgba(255,255,255,.2)" strokeWidth="8" fill="none" />
-      <circle cx="44" cy="44" r={r} stroke="#fff" strokeWidth="8" fill="none" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={off} transform="rotate(-90 44 44)" />
+    <svg width="80" height="80" viewBox="0 0 80 80" style={{ display: 'block', margin: '0 auto' }}>
+      <circle cx="40" cy="40" r={r} stroke="rgba(255,255,255,0.15)" strokeWidth="7" fill="none" />
+      <circle
+        cx="40"
+        cy="40"
+        r={r}
+        stroke="#00ff88"
+        strokeWidth="7"
+        fill="none"
+        strokeLinecap="round"
+        strokeDasharray={c}
+        strokeDashoffset={off}
+        transform="rotate(-90 40 40)"
+      />
+      <text x="40" y="45" textAnchor="middle" fill="#ffffff" fontSize="16" fontWeight="800" fontFamily="var(--display)">
+        {value}%
+      </text>
     </svg>
   );
 }
 
 function Spark({ values, color }) {
   const max = Math.max(...values, 1);
-  const pts = values.map((v, i) => `${(i / (values.length - 1)) * 220},${70 - (v / max) * 58}`).join(' ');
+  const pts = values.map((v, i) => `${(i / (values.length - 1)) * 110},${55 - (v / max) * 45}`).join(' ');
   return (
-    <svg width="100%" height="78" viewBox="0 0 220 78" preserveAspectRatio="none">
-      <polyline fill="none" stroke={color} strokeWidth="3" points={pts} />
+    <svg width="110" height="60" viewBox="0 0 110 60" style={{ display: 'block', overflow: 'visible' }}>
+      <polyline fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={pts} />
     </svg>
   );
 }
@@ -43,9 +57,17 @@ function Spark({ values, color }) {
 function MiniBars({ values }) {
   const max = Math.max(...values, 1);
   return (
-    <svg width="100%" height="78" viewBox="0 0 220 78">
+    <svg width="110" height="60" viewBox="0 0 110 60" style={{ display: 'block' }}>
       {values.map((v, i) => (
-        <rect key={i} x={10 + i * 30} y={70 - (v / max) * 58} width="18" height={(v / max) * 58} rx="5" fill="rgba(255,255,255,.88)" />
+        <rect
+          key={i}
+          x={6 + i * 15}
+          y={55 - (v / max) * 45}
+          width="9"
+          height={(v / max) * 45}
+          rx="3"
+          fill="rgba(255,255,255,0.85)"
+        />
       ))}
     </svg>
   );
@@ -53,35 +75,35 @@ function MiniBars({ values }) {
 
 function LineChart() {
   const w = 320;
-  const h = 160;
+  const h = 150;
   const max = 16;
   const path = (arr) =>
-    arr.map((v, i) => `${i === 0 ? 'M' : 'L'} ${24 + i * 46} ${h - 28 - (v / max) * 110}`).join(' ');
+    arr.map((v, i) => `${i === 0 ? 'M' : 'L'} ${20 + i * 46} ${h - 25 - (v / max) * 95}`).join(' ');
   return (
     <div className="card">
-      <div className="row" style={{ paddingTop: 0, border: 0 }}>
+      <div className="row" style={{ paddingTop: 0, border: 0, marginBottom: 8 }}>
         <b>Threats intercepted / day</b>
-        <span className="tiny muted">7 days</span>
+        <span className="tiny muted">7-day view</span>
       </div>
-      <svg width="100%" height="170" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+      <svg width="100%" height="150" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
         {[0, 1, 2, 3].map((g) => (
-          <line key={g} x1="20" x2="310" y1={28 + g * 28} y2={28 + g * 28} stroke="var(--chart-grid)" />
+          <line key={g} x1="15" x2="305" y1={25 + g * 25} y2={25 + g * 25} stroke="var(--chart-grid)" strokeDasharray="3 3" />
         ))}
         {Object.entries(SERIES).map(([name, arr]) => (
-          <path key={name} d={path(arr)} fill="none" stroke={COLORS[name]} strokeWidth="2.6" strokeLinejoin="round" />
+          <path key={name} d={path(arr)} fill="none" stroke={COLORS[name]} strokeWidth="2.8" strokeLinejoin="round" strokeLinecap="round" />
         ))}
       </svg>
-      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 10 }}>
         {Object.entries(COLORS).map(([n, c]) => (
-          <span key={n} className="tiny" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <i style={{ width: 10, height: 10, borderRadius: 99, background: c, display: 'inline-block' }} />
+          <span key={n} className="tiny" style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
+            <i style={{ width: 8, height: 8, borderRadius: 99, background: c, display: 'inline-block' }} />
             {n}
           </span>
         ))}
       </div>
-      <div className="grid-3" style={{ gridTemplateColumns: 'repeat(7,1fr)', marginTop: 8 }}>
+      <div className="grid-3" style={{ gridTemplateColumns: 'repeat(7,1fr)', marginTop: 10, borderTop: '1px solid var(--line)', paddingTop: 8 }}>
         {DAYS.map((d) => (
-          <div key={d} className="tiny muted" style={{ textAlign: 'center' }}>
+          <div key={d} className="tiny muted" style={{ textAlign: 'center', fontWeight: 600 }}>
             {d}
           </div>
         ))}
@@ -95,24 +117,24 @@ const CARDS = [
     key: 'score',
     title: 'Security score',
     value: '86',
-    sub: 'Low residual risk · +4 this week',
-    bg: 'linear-gradient(135deg,#064e3b,#0b1220 55%,#022c22)',
+    sub: 'Low residual risk · +4 pts this week',
+    bg: 'linear-gradient(135deg, #064e3b 0%, #0b1220 60%, #022c22 100%)',
     chart: <MiniRing value={86} />,
   },
   {
     key: 'threats',
     title: 'Threats detected',
     value: '128',
-    sub: 'Phish + SMS leading this week',
-    bg: 'linear-gradient(135deg,#0c4a6e,#0b1220 50%,#082f49)',
-    chart: <Spark values={SERIES.Phishing} color="#7dd3fc" />,
+    sub: 'Phish & SMS leading this week',
+    bg: 'linear-gradient(135deg, #0c4a6e 0%, #0b1220 60%, #082f49 100%)',
+    chart: <Spark values={SERIES.Phishing} color="#00c8ff" />,
   },
   {
     key: 'blocked',
     title: 'Scams blocked',
     value: '91',
-    sub: '71% intercept rate',
-    bg: 'linear-gradient(135deg,#7c2d12,#1c1917 45%,#431407)',
+    sub: '71% autonomous intercept rate',
+    bg: 'linear-gradient(135deg, #7c2d12 0%, #1c1917 55%, #431407 100%)',
     chart: <MiniBars values={[5, 8, 6, 11, 9, 7, 10]} />,
   },
 ];
@@ -122,31 +144,41 @@ export default function Home() {
   const nav = useNavigate();
   const scroller = useRef(null);
   const [idx, setIdx] = useState(0);
-  const pause = useRef(false);
+  const isInteracting = useRef(false);
 
   useEffect(() => {
-    const id = setInterval(() => {
-      if (pause.current) return;
-      setIdx((i) => {
-        const next = (i + 1) % CARDS.length;
-        const el = scroller.current;
-        if (el) el.scrollTo({ left: next * el.clientWidth, behavior: 'smooth' });
-        return next;
-      });
-    }, 5000);
-    return () => clearInterval(id);
-  }, []);
+    const timer = setInterval(() => {
+      if (isInteracting.current || !scroller.current) return;
+      const next = (idx + 1) % CARDS.length;
+      scrollToCard(next);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [idx]);
 
-  const onScroll = () => {
+  const scrollToCard = (index) => {
     const el = scroller.current;
     if (!el) return;
-    setIdx(Math.round(el.scrollLeft / el.clientWidth));
+    const cardWidth = el.clientWidth;
+    el.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+    setIdx(index);
+  };
+
+  const handleScroll = () => {
+    const el = scroller.current;
+    if (!el) return;
+    const cardWidth = el.clientWidth;
+    if (cardWidth > 0) {
+      const newIdx = Math.round(el.scrollLeft / cardWidth);
+      if (newIdx !== idx && newIdx >= 0 && newIdx < CARDS.length) {
+        setIdx(newIdx);
+      }
+    }
   };
 
   const quick = [
     { l: 'Link', p: '/app/scan/link', ico: Ico.link, bg: 'rgba(0,200,255,.14)', fg: '#00c8ff' },
     { l: 'SMS', p: '/app/scan/sms', ico: Ico.sms, bg: 'rgba(0,255,136,.14)', fg: '#00ff88' },
-    { l: 'Email', p: '/app/scan/email', ico: Ico.mail, bg: 'rgba(124,92,255,.16)', fg: '#a78bfa' },
+    { l: 'Email', p: '/app/scan/email', ico: Ico.mail, bg: 'rgba(167,139,250,.16)', fg: '#a78bfa' },
     { l: 'QR', p: '/app/scan/qr', ico: Ico.qr, bg: 'rgba(255,176,32,.16)', fg: '#ffb020' },
   ];
 
@@ -160,79 +192,114 @@ export default function Home() {
           right={
             <button className="icon-btn" onClick={() => nav('/app/notifications')} aria-label="Notifications">
               {Ico.bell}
-              {unread ? <b style={{ position: 'absolute', margin: '-18px 0 0 10px', fontSize: 10, color: '#ff4d6d' }}>{unread}</b> : null}
+              {unread > 0 ? (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 6,
+                    right: 6,
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    background: 'var(--danger)',
+                    boxShadow: '0 0 8px var(--danger)',
+                  }}
+                />
+              ) : null}
             </button>
           }
         />
 
-        <div
-          className="carousel"
-          ref={scroller}
-          onScroll={onScroll}
-          onPointerDown={() => {
-            pause.current = true;
-          }}
-          onPointerUp={() => {
-            pause.current = false;
-          }}
-        >
-          {CARDS.map((c) => (
-            <article key={c.key} className="stat-card" style={{ background: c.bg }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
-                <div>
-                  <h3>{c.title}</h3>
-                  <div className="big">{c.value}</div>
-                  <div className="sub">{c.sub}</div>
-                </div>
-                <div style={{ width: 120 }}>{c.chart}</div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="dots">
-          {CARDS.map((c, i) => (
-            <i key={c.key} className={i === idx ? 'on' : ''} />
-          ))}
-        </div>
-
-        <div className="desk-grid" style={{ marginTop: 8 }}>
-          <div>
-            <div className="section-title">
-              Quick scan
-              <button className="linkish" onClick={() => nav('/app/scan')}>
-                View all
-              </button>
-            </div>
-            <div className="quick-row">
-              {quick.map((q) => (
-                <button key={q.l} className="quick-sq" onClick={() => nav(q.p)}>
-                  <div className="qi" style={{ background: q.bg, color: q.fg }}>
-                    {q.ico}
+        {/* Swipeable Threat Cards Carousel */}
+        <div className="carousel-wrapper">
+          <div
+            className="carousel"
+            ref={scroller}
+            onScroll={handleScroll}
+            onTouchStart={() => {
+              isInteracting.current = true;
+            }}
+            onTouchEnd={() => {
+              setTimeout(() => {
+                isInteracting.current = false;
+              }, 1000);
+            }}
+            onMouseEnter={() => {
+              isInteracting.current = true;
+            }}
+            onMouseLeave={() => {
+              isInteracting.current = false;
+            }}
+          >
+            {CARDS.map((c) => (
+              <article key={c.key} className="stat-card" style={{ background: c.bg }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+                  <div>
+                    <h3>{c.title}</h3>
+                    <div className="big">{c.value}</div>
+                    <div className="sub">{c.sub}</div>
                   </div>
-                  <b>{q.l}</b>
-                </button>
-              ))}
-            </div>
-
-            <div className="section-title">Academy</div>
-            <button className="academy" onClick={() => nav('/app/training')}>
-              <div className="qi" style={{ width: 48, height: 48, borderRadius: 16, background: 'rgba(0,255,136,.18)', display: 'grid', placeItems: 'center', color: '#00ff88' }}>
-                {Ico.academy}
-              </div>
-              <div className="grow">
-                <h3>Cyber Academy</h3>
-                <p>Learn how to stop phishing, SIM-swap and WhatsApp fraud in real Nigerian scenarios.</p>
-              </div>
-              {Ico.chevron}
-            </button>
+                  <div style={{ display: 'grid', placeItems: 'center', flexShrink: 0 }}>{c.chart}</div>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div>
-            <div className="section-title">Intercepted this week</div>
-            <LineChart />
+          <div className="dots">
+            {CARDS.map((c, i) => (
+              <i key={c.key} className={i === idx ? 'on' : ''} onClick={() => scrollToCard(i)} />
+            ))}
           </div>
         </div>
 
+        {/* Quick Scanner Access */}
+        <div className="section-title">
+          Quick scan
+          <button className="linkish" onClick={() => nav('/app/scan')}>
+            View all (7)
+          </button>
+        </div>
+        <div className="quick-row">
+          {quick.map((q) => (
+            <button key={q.l} className="quick-sq" onClick={() => nav(q.p)}>
+              <div className="qi" style={{ background: q.bg, color: q.fg }}>
+                {q.ico}
+              </div>
+              <b>{q.l}</b>
+            </button>
+          ))}
+        </div>
+
+        {/* Academy Callout */}
+        <div className="section-title">Academy</div>
+        <button className="academy" onClick={() => nav('/app/training')}>
+          <div
+            className="qi"
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: 16,
+              background: 'rgba(0,255,136,.15)',
+              display: 'grid',
+              placeItems: 'center',
+              color: '#00ff88',
+              flexShrink: 0,
+            }}
+          >
+            {Ico.academy}
+          </div>
+          <div className="grow">
+            <h3>Cyber Academy</h3>
+            <p>Learn how to stop phishing, SIM-swap and WhatsApp fraud in real Nigerian scenarios.</p>
+          </div>
+          <span style={{ color: 'var(--muted)', fontSize: 18 }}>›</span>
+        </button>
+
+        {/* 7-Day Chart */}
+        <div className="section-title">Intercepted this week</div>
+        <LineChart />
+
+        {/* News & Activity */}
         <div className="desk-grid">
           <div>
             <div className="section-title">
@@ -247,14 +314,15 @@ export default function Home() {
                   <div className="thumb" style={{ background: 'var(--surface-2)', color: 'var(--blue)' }}>
                     {n.tag}
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 14 }}>{n.t}</div>
-                    <div className="tiny muted">{n.time} ago</div>
+                  <div className="grow">
+                    <div style={{ fontWeight: 600, fontSize: 13, lineHeight: 1.4 }}>{n.t}</div>
+                    <div className="tiny muted" style={{ marginTop: 2 }}>{n.time} ago</div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
           <div>
             <div className="section-title">Recent activity</div>
             <div className="card">
@@ -267,7 +335,7 @@ export default function Home() {
                 <div className="activity" key={t}>
                   <div className="dot" style={{ background: color }} />
                   <div className="grow">
-                    <div style={{ fontSize: 14 }}>{t}</div>
+                    <div style={{ fontSize: 13, fontWeight: 500 }}>{t}</div>
                     <div className="tiny muted">{time} ago</div>
                   </div>
                 </div>
