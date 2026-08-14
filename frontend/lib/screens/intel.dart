@@ -13,7 +13,7 @@ class IntelScreen extends StatelessWidget {
         severity: 'Critical',
         category: 'Phishing',
         region: 'Nigeria (Lagos / Abuja)',
-        description: 'Attackers spoofing CBN shortcodes claiming bank accounts will be closed unless unverified links are opened.',
+        description: 'Attackers spoofing CBN shortcodes claiming accounts will be locked unless an unverified KYC link is clicked.',
         time: '12m ago',
       ),
       const ThreatCampaign(
@@ -106,8 +106,8 @@ class IntelScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                             decoration: BoxDecoration(
                               color: c.severity == 'Critical'
-                                  ? SentinelTheme.danger.withValues(alpha: 0.15)
-                                  : SentinelTheme.warn.withValues(alpha: 0.15),
+                                  ? SentinelTheme.danger.withOpacity(0.15)
+                                  : SentinelTheme.warn.withOpacity(0.15),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(

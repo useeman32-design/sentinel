@@ -10,8 +10,8 @@ class AssistantScreen extends StatefulWidget {
 }
 
 class _AssistantScreenState extends State<AssistantScreen> {
-  final ctrl = TextEditingController();
-  final scroll = ScrollController();
+  final TextEditingController ctrl = TextEditingController();
+  final ScrollController scroll = ScrollController();
   bool busy = false;
 
   final List<Map<String, String>> messages = [
@@ -22,7 +22,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
     },
   ];
 
-  final starters = [
+  final List<String> starters = [
     'How do I secure my WhatsApp?',
     'How do scammers steal bank accounts?',
     'What is a SIM swap attack?',
@@ -43,12 +43,13 @@ class _AssistantScreenState extends State<AssistantScreen> {
 
     final response = await GeminiService.askAdvisor(q);
 
-    setState(() {
-      messages.add({'role': 'ai', 'text': response});
-      busy = false;
-    });
-
-    _scrollToEnd();
+    if (mounted) {
+      setState(() {
+        messages.add({'role': 'ai', 'text': response});
+        busy = false;
+      });
+      _scrollToEnd();
+    }
   }
 
   void _scrollToEnd() {
@@ -61,6 +62,13 @@ class _AssistantScreenState extends State<AssistantScreen> {
         );
       }
     });
+  }
+
+  @override
+  void dispose() {
+    ctrl.dispose();
+    scroll.dispose();
+    super.dispose();
   }
 
   @override
@@ -89,7 +97,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: SentinelTheme.green.withValues(alpha: 0.15),
+                    color: SentinelTheme.green.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text('Live', style: TextStyle(color: SentinelTheme.green, fontSize: 11, fontWeight: FontWeight.w800)),
@@ -127,7 +135,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
                     constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.82),
                     decoration: BoxDecoration(
                       color: isUser
-                          ? SentinelTheme.green.withValues(alpha: 0.2)
+                          ? SentinelTheme.green.withOpacity(0.2)
                           : SentinelTheme.surfaceDark2,
                       borderRadius: BorderRadius.circular(18).copyWith(
                         bottomRight: isUser ? const Radius.circular(4) : const Radius.circular(18),
@@ -135,7 +143,7 @@ class _AssistantScreenState extends State<AssistantScreen> {
                       ),
                       border: Border.all(
                         color: isUser
-                            ? SentinelTheme.green.withValues(alpha: 0.3)
+                            ? SentinelTheme.green.withOpacity(0.3)
                             : Colors.white10,
                       ),
                     ),

@@ -56,7 +56,7 @@ class ScanHub extends StatelessWidget {
                           width: 42,
                           height: 42,
                           decoration: BoxDecoration(
-                            color: m.$4.withValues(alpha: 0.15),
+                            color: m.$4.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(m.$1, color: m.$4, size: 24),
@@ -307,7 +307,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                   width: 90,
                   height: 90,
                   decoration: BoxDecoration(
-                    color: SentinelTheme.blue.withValues(alpha: 0.15),
+                    color: SentinelTheme.blue.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Icon(Icons.qr_code_scanner, size: 54, color: SentinelTheme.blue),
@@ -484,7 +484,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
                       Text(strength, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(color: scoreColor.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(20)),
+                        decoration: BoxDecoration(color: scoreColor.withOpacity(0.15), borderRadius: BorderRadius.circular(20)),
                         child: Text('$score / 100', style: TextStyle(color: scoreColor, fontWeight: FontWeight.w800, fontSize: 12)),
                       ),
                     ],
@@ -625,7 +625,7 @@ class VerdictWidget extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: color.withValues(alpha: 0.35)),
+        side: BorderSide(color: color.withOpacity(0.35)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(18),
@@ -638,9 +638,9 @@ class VerdictWidget extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.15),
+                    color: color.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: color.withValues(alpha: 0.3)),
+                    border: Border.all(color: color.withOpacity(0.3)),
                   ),
                   child: Text(
                     result.verdict,
@@ -693,7 +693,7 @@ class VerdictWidget extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: SentinelTheme.blue.withValues(alpha: 0.12),
+                      color: SentinelTheme.blue.withOpacity(0.12),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(s, style: const TextStyle(color: SentinelTheme.blue, fontSize: 10, fontWeight: FontWeight.w600)),

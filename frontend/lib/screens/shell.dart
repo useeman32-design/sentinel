@@ -59,7 +59,7 @@ class _AppShellState extends State<AppShell> {
             ? SentinelTheme.surfaceDark
             : SentinelTheme.surfaceLight,
         elevation: 10,
-        indicatorColor: SentinelTheme.green.withValues(alpha: 0.2),
+        indicatorColor: SentinelTheme.green.withOpacity(0.2),
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),

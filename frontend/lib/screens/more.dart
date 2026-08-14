@@ -37,7 +37,7 @@ class MoreScreen extends StatelessWidget {
                     width: 52,
                     height: 52,
                     decoration: BoxDecoration(
-                      color: SentinelTheme.green.withValues(alpha: 0.15),
+                      color: SentinelTheme.green.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Icon(Icons.person, color: SentinelTheme.green, size: 28),
@@ -53,7 +53,7 @@ class MoreScreen extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
-                            color: SentinelTheme.green.withValues(alpha: 0.15),
+                            color: SentinelTheme.green.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Text('Pro Enterprise', style: TextStyle(color: SentinelTheme.green, fontSize: 10, fontWeight: FontWeight.w800)),
@@ -119,7 +119,7 @@ class MoreScreen extends StatelessWidget {
             icon: const Icon(Icons.logout, color: SentinelTheme.danger, size: 18),
             label: const Text('Sign Out of Workspace', style: TextStyle(color: SentinelTheme.danger)),
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: SentinelTheme.danger.withValues(alpha: 0.4)),
+              side: BorderSide(color: SentinelTheme.danger.withOpacity(0.4)),
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             ),
@@ -149,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: SentinelTheme.green.withValues(alpha: 0.15),
+                      color: SentinelTheme.green.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: const Icon(Icons.person, color: SentinelTheme.green, size: 40),
@@ -160,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: SentinelTheme.blue.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(20)),
+                    decoration: BoxDecoration(color: SentinelTheme.blue.withOpacity(0.15), borderRadius: BorderRadius.circular(20)),
                     child: const Text('Pro Enterprise Tier', style: TextStyle(color: SentinelTheme.blue, fontSize: 11, fontWeight: FontWeight.w800)),
                   ),
                 ],

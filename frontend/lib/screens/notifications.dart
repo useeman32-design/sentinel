@@ -103,7 +103,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: color.withValues(alpha: 0.15),
+                                    color: color.withOpacity(0.15),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Text(n.kind, style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 10)),

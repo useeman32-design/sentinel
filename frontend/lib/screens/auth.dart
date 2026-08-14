@@ -26,7 +26,7 @@ class Splash extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: SentinelTheme.green.withValues(alpha: 0.3),
+                      color: SentinelTheme.green.withOpacity(0.3),
                       blurRadius: 24,
                       offset: const Offset(0, 8),
                     ),
@@ -46,7 +46,7 @@ class Splash extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: SentinelTheme.green.withValues(alpha: 0.15),
+                  color: SentinelTheme.green.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(

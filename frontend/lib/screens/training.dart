@@ -60,7 +60,7 @@ class TrainingScreen extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              border: Border.all(color: SentinelTheme.green.withValues(alpha: 0.3)),
+              border: Border.all(color: SentinelTheme.green.withOpacity(0.3)),
             ),
             child: const Row(
               children: [

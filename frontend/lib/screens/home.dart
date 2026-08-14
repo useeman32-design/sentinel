@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: i == idx ? SentinelTheme.green : Colors.white24,
                     borderRadius: BorderRadius.circular(9),
                     boxShadow: i == idx
-                        ? [BoxShadow(color: SentinelTheme.green.withValues(alpha: 0.4), blurRadius: 6)]
+                        ? [BoxShadow(color: SentinelTheme.green.withOpacity(0.4), blurRadius: 6)]
                         : null,
                   ),
                 ),
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  color: s.$3.withValues(alpha: 0.15),
+                                  color: s.$3.withOpacity(0.15),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Icon(s.$1, color: s.$3, size: 22),
@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                border: Border.all(color: SentinelTheme.green.withValues(alpha: 0.25)),
+                border: Border.all(color: SentinelTheme.green.withOpacity(0.25)),
               ),
               child: Row(
                 children: [
@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: SentinelTheme.green.withValues(alpha: 0.2),
+                      color: SentinelTheme.green.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: const Icon(Icons.school, color: SentinelTheme.green, size: 26),

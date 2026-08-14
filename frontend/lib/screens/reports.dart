@@ -39,10 +39,10 @@ class ReportsScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
                                 color: r.$2 == 'High'
-                                    ? SentinelTheme.danger.withValues(alpha: 0.15)
+                                    ? SentinelTheme.danger.withOpacity(0.15)
                                     : r.$2 == 'Medium'
-                                        ? SentinelTheme.warn.withValues(alpha: 0.15)
-                                        : SentinelTheme.green.withValues(alpha: 0.15),
+                                        ? SentinelTheme.warn.withOpacity(0.15)
+                                        : SentinelTheme.green.withOpacity(0.15),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
@@ -100,7 +100,7 @@ class ReportDetailScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: SentinelTheme.green.withValues(alpha: 0.15),
+                          color: SentinelTheme.green.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Text('Status · Low Risk', style: TextStyle(color: SentinelTheme.green, fontWeight: FontWeight.w800, fontSize: 11)),

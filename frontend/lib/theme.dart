@@ -31,12 +31,12 @@ class SentinelTheme {
         surface: surfaceDark,
         error: danger,
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardTheme(
         color: surfaceDark,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: const BorderSide(color: Colors.white10),
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+          side: BorderSide(color: Colors.white10),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -68,12 +68,21 @@ class SentinelTheme {
       ),
     );
 
-    return base.copyWith(
-      textTheme: GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
-        bodyColor: textDark,
-        displayColor: textDark,
-      ),
-    );
+    try {
+      return base.copyWith(
+        textTheme: GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
+          bodyColor: textDark,
+          displayColor: textDark,
+        ),
+      );
+    } catch (_) {
+      return base.copyWith(
+        textTheme: base.textTheme.apply(
+          bodyColor: textDark,
+          displayColor: textDark,
+        ),
+      );
+    }
   }
 
   static ThemeData light() {
@@ -87,12 +96,12 @@ class SentinelTheme {
         surface: surfaceLight,
         error: Color(0xFFDC2626),
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardTheme(
         color: surfaceLight,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: const BorderSide(color: Color(0x1A0F172A)),
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+          side: BorderSide(color: Color(0x1A0F172A)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -124,11 +133,20 @@ class SentinelTheme {
       ),
     );
 
-    return base.copyWith(
-      textTheme: GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
-        bodyColor: textLight,
-        displayColor: textLight,
-      ),
-    );
+    try {
+      return base.copyWith(
+        textTheme: GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
+          bodyColor: textLight,
+          displayColor: textLight,
+        ),
+      );
+    } catch (_) {
+      return base.copyWith(
+        textTheme: base.textTheme.apply(
+          bodyColor: textLight,
+          displayColor: textLight,
+        ),
+      );
+    }
   }
 }
