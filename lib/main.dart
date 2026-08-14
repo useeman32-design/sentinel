@@ -1,40 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'theme.dart';
 import 'screens/shell.dart';
 import 'screens/auth.dart';
 
-void main() => runApp(const SentinelApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const SentinelApp());
+}
 
 class SentinelApp extends StatefulWidget {
   const SentinelApp({super.key});
+
   @override
   State<SentinelApp> createState() => _SentinelAppState();
 }
 
 class _SentinelAppState extends State<SentinelApp> {
-  ThemeMode mode = ThemeMode.dark;
-  bool loggedIn = false;
+  ThemeMode themeMode = ThemeMode.dark;
+  bool loggedIn = true; // Auto-logged in for quick preview / development
+
+  void toggleTheme() {
+    setState(() {
+      themeMode = themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    });
+  }
+
+  void login() {
+    setState(() => loggedIn = true);
+  }
+
+  void logout() {
+    setState(() => loggedIn = false);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sentinel AI',
       debugShowCheckedModeBanner: false,
-      themeMode: mode,
-      theme: SentinelTheme.light(GoogleFonts.interTextTheme()),
-      darkTheme: SentinelTheme.dark(GoogleFonts.interTextTheme(ThemeData.dark().textTheme)),
+      themeMode: themeMode,
+      theme: SentinelTheme.light(),
+      darkTheme: SentinelTheme.dark(),
       home: loggedIn
           ? AppShell(
-              onToggleTheme: () {
-                setState(() {
-                  mode = mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-                });
-              },
-              onLogout: () => setState(() => loggedIn = false),
+              onToggleTheme: toggleTheme,
+              onLogout: logout,
             )
           : Splash(
-              onEnter: () => setState(() => loggedIn = true),
+              onEnter: login,
             ),
     );
   }
